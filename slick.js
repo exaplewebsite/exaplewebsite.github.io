@@ -1,9 +1,10 @@
 $(document).ready(function(){
 $('.achievements__list').slick({
-    infinite: true,
+    infinite: false,
     slidesToShow: 3,
     arrows: false,
-    slidesToScroll: 3,
     swipeToSlide: true,
+    mobileFirst: true,
+    speed: 500
 });
 });
