@@ -35,6 +35,9 @@
   width: 350px;
   margin: 0 auto;
 }
+.rank__name__img {
+  width: 100px;
+}
 .rank__name__text {
   display: flex;
   flex-direction: column;
@@ -69,7 +72,6 @@
 }
 .rank__progress__bar__complete {
   background-color: #9C7CFC;
-  width: 50%;
   height: 22px;
   border-radius: 10px;
   display: flex;
@@ -145,6 +147,9 @@
   font-size: 20px;
   color: #000000;
 }
+.achievements__list__item__text img {
+  width: 70px;
+}
 
 .sale {
   margin-top: 5px;
@@ -161,26 +166,26 @@
   font-style: normal;
   font-weight: 400;
   font-size: 55px;
-  line-height: 65px;
+  line-height: 55px;
 }
 .sale__lower-stickers {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  transform: translateY(-40%);
+  transform: translateY(-30px);
 }
 .sale__lower-stickers span {
   font-style: normal;
   font-weight: 400;
   font-size: 55px;
-  line-height: 65px;
+  line-height: 55px;
 }
 .sale h2 {
   font-family: "Rubik";
   font-style: normal;
   font-weight: 400;
   font-size: 80px;
-  line-height: 95px;
+  line-height: 82px;
   transform: translateY(-30%);
   text-shadow: -1px 0px 0px #000000, 1px 0px 0px #000000, 0px -1px 0px #000000, 7px 5px 4px rgba(0, 0, 0, 0.3);
   color: #FF0000;
@@ -193,6 +198,7 @@
   line-height: 24px;
   text-align: center;
   color: #1E1E1E;
+  transform: translateY(-20px);
 }
 
 .intensity__head {
@@ -324,7 +330,7 @@
   font-weight: 400;
   font-size: 80px;
   color: #FF0000;
-  text-shadow: -1px 0px 0px #000000, 1px 0px 0px #000000, 0px -1px 0px #000000, 7px 5px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: -1px 0px 0px #000000, 1px 0px 0px #000000, 0px -1px 0px #000000, 7px 5px 4px rgba(0, 0, 0, 0.6);
 }
 .office-hours__hours {
   font-family: "Rubik";
@@ -333,7 +339,7 @@
   font-size: 50px;
   line-height: 59px;
   color: #FF0000;
-  text-shadow: -1px 0px 0px #000000, 1px 0px 0px #000000, 0px -1px 0px #000000, 7px 5px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: -1px 0px 0px #000000, 1px 0px 0px #000000, 0px -1px 0px #000000, 7px 5px 4px rgba(0, 0, 0, 0.6);
 }
 .office-hours p {
   font-family: "Montserrat";
@@ -357,6 +363,7 @@
 .subscription {
   text-align: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .subscription__text {
   display: block;
@@ -406,23 +413,6 @@
   color: #000000;
 }
 
-@media screen and (max-width: 400px) {
-  .achievements__list__item__text span {
-    font-size: 16px;
-  }
-  .achievements__list__item__text img {
-    width: 90%;
-  }
-  .rank__name__text__rank-name {
-    font-size: 30px;
-  }
-  .sale__lower-stickers {
-    transform: translateY(-10%);
-  }
-  .rank__name {
-    width: 300px;
-  }
-}
 .information {
   display: none;
   position: fixed;
@@ -442,19 +432,59 @@
 }
 .information__window {
   position: fixed;
-  width: 90%;
-  height: 500px;
+  width: 100%;
+  height: 90vh;
   background-color: #fff;
-  top: calc(50% - 250px);
-  left: 5%;
+  top: 5vh;
   border-radius: 20px;
-  text-align: center;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.information__window p {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+  width: 90%;
+  margin: 0 auto;
 }
 .information__window span {
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 37px;
-  color: #000000;
+  font-weight: 700;
+  font-size: 14px;
+  color: #9C7CFC;
+}
+
+@media screen and (max-width: 400px) {
+  .achievements__list__item__text span {
+    font-size: 16px;
+  }
+  .achievements__list__item__text img {
+    width: 90%;
+  }
+  .rank__name__text__rank-name {
+    font-size: 30px;
+  }
+  .sale__lower-stickers {
+    transform: translateY(-10%);
+  }
+  .rank__name {
+    width: 300px;
+  }
+  .information__window span {
+    font-size: 12px;
+  }
+  .information__window p {
+    font-size: 12px;
+  }
+}
+.text.night {
+  color: #fff;
+}
+
+.rank__progress__bar.night {
+  background-color: #fff;
 }/*# sourceMappingURL=main.css.map */

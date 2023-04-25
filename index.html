@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Rubik&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="slick.css"/>
     <link rel="stylesheet" href="/main.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -17,21 +18,21 @@
         <div class="rank">
             <button class="rank__information">i</button>
             <div class="rank__name">
-                <img src="img/cheburashka.png" alt="cheburashka">
+                <img src="" alt="rank" class="rank__name__img">
                 <div class="rank__name__text">
-                    <span class="rank__name__text__your-rank">Твой ранг</span>
-                    <span class="rank__name__text__rank-name">Чебурашка</span>
+                    <span class="rank__name__text__your-rank text">Твой ранг</span>
+                    <span class="rank__name__text__rank-name"></span>
                 </div>
             </div>
             <div class="rank__progress">
                 <div class="rank__progress__bar">
                     <div class="rank__progress__bar__complete">
-                        <span class="rank__progress__bar__complete__value">50</span>
+                        <span class="rank__progress__bar__complete__value text"></span>
                     </div>
                 </div>
                 <div class="rank__progress__numbers">
-                    <span class="rank__progress__numbers__zero">0</span>
-                    <span class="rank__progress__numbers__one-hundred">100</span>
+                    <span class="rank__progress__numbers__zero text"></span>
+                    <span class="rank__progress__numbers__one-hundred text"></span>
                 </div>
             </div>
         </div>
@@ -42,16 +43,16 @@
         <div class="achievements">
             <div class="achievements__head">
                 <hr>
-                <h1>Достижения</h1>
+                <h1 id="text">Достижения</h1>
                 <hr>
             </div>
             <div class="achievements__list">
-                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img src="img/cheburashka.png" alt="7 in row"> <span>7 дней вряд</span></div></div>
-                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img src="img/cheburashka.png" alt="14 in row"> <span>14 дней вряд</span></div></div>
-                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img src="img/cheburashka.png" alt="21 in row"> <span>21 день подряд</span></div></div>
-                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img src="img/cheburashka.png" alt="invite friend"> <span>Пригласи друга</span></div></div>
-                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img src="img/cheburashka.png" alt="without office hours"> <span>Без office hours</span></div></div>
-                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img src="img/cheburashka.png" alt="complete module"> <span>Завершил модуль</span></div></div>
+                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img id="1" src="img/seven-days-g.svg" alt="7 in row"> <span class="text">7 дней вряд</span></div></div>
+                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img id="2" src="img/fourteen-days-g.svg" alt="14 in row"> <span class="text">14 дней вряд</span></div></div>
+                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img id="3" src="img/twenty-one-days-g.svg" alt="21 in row"> <span class="text">21 день подряд</span></div></div>
+                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img id="4" src="img/invite-friend-g.svg" alt="invite friend"> <span class="text">Пригласи друга</span></div></div>
+                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img id="5" src="img/own-g.svg" alt="without office hours"> <span class="text">Без office hours</span></div></div>
+                    <div class="achievements__list__item"><div class="achievements__list__item__text"><img id="6" src="img/complete-module-g.svg" alt="complete module"> <span class="text">Завершил модуль</span></div></div>
             </div>
         </div>
     </div>
@@ -63,8 +64,8 @@
             <span>🎊</span>
             <span>🎉</span>
         </div>
-        <h2>15%</h2>
-        <p>общая скидка <br> на следующий месяц</p>
+        <h2 class="sale__value"></h2>
+        <p class="text">общая скидка <br> на следующий месяц</p>
         <div class="sale__lower-stickers">
             <span>🥳</span>
             <span>👍</span>
@@ -77,32 +78,32 @@
     <div class="container">
         <div class="intensity__head">
             <hr>
-            <h1>Интенсивность</h1>
+            <h1 class="text">Интенсивность</h1>
             <hr>
         </div>
         <div class="intensity__notifications">
-            <span class="intensity__notifications__text">Уведомления</span>
+            <span class="intensity__notifications__text text">Уведомления</span>
             <label class="intensity__notifications__btn">
-                <input type="checkbox">
+                <input class="intensity__notifications__btn__click" type="checkbox">
                 <span class="slider"></span>
             </label>
         </div>
         <div class="intensity__list">
             <div class="intensity__list__item">
-                <button class="intensity__list__item__btn">базовая</button>
-                <span>15</span>
+                <button id="firstIntensity" class="intensity__list__item__btn">базовая</button>
+                <span class="text">15</span>
             </div>
             <div class="intensity__list__item">
-                <button class="intensity__list__item__btn">лёгкая</button>
-                <span>30</span>
+                <button id="secondIntensity" class="intensity__list__item__btn">лёгкая</button>
+                <span class="text">30</span>
             </div>
             <div class="intensity__list__item">
-                <button class="intensity__list__item__btn">обычная</button>
-                <span>60</span>
+                <button id="thirdIntensity" class="intensity__list__item__btn">обычная</button>
+                <span class="text">60</span>
             </div>
             <div class="intensity__list__item">
-                <button class="intensity__list__item__btn">интенсивная</button>
-                <span>90</span>
+                <button id="fourthIntensity" class="intensity__list__item__btn">интенсивная</button>
+                <span class="text">90</span>
             </div>
         </div>
     </div>
@@ -115,12 +116,12 @@
             <div class="office-hours__icons">
                 <img class="office-hours__icons__notebook" src="img/notebook.svg" alt="notebook">
                 <div class="office-hours__icons__text">
-                    <span class="office-hours__number">4</span>
+                    <span class="office-hours__number"></span>
                     <span class="office-hours__hours">ч.</span>
                 </div>
                 <img src="img/clock.svg" alt="clock">
             </div>
-            <p>office hours <br> осталось в этом месяце</p> 
+            <p class="text">office hours <br> осталось в этом месяце</p> 
             <hr>
         </div>
     </div>
@@ -128,13 +129,13 @@
 <section>
     <div class="container">
         <div class="subscription">
-            <span class="subscription__text">Подписка заканчивается <br> через</span>
-            <span class="subscription__number">10</span>
-            <span class="subscription__time">дней</span>
-            <span class="subscription__number">5</span>
+            <span class="subscription__text text">Подписка заканчивается <br> через</span>
+            <span id="day" class="subscription__number"></span>
+            <span id="days" class="subscription__time"></span>
+            <span id="hour" class="subscription__number"></span>
             <span class="subscription__time">часов</span>
             <div class="subscription__period">
-                <span class="subscription__period__number">08.01.23 - 08.02.23</span>
+                <span class="subscription__period__number text"></span>
             </div>
         </div>
     </div>
@@ -143,7 +144,13 @@
     <div class="information">
         <div class="information__window">
             <img class="information__window__btn" src="img/icons8-close-67.png" alt="close">
-            <span>Информация</span>
+            <p> <span >Ранг</span> отражает объем решенных практических заданий, за который тебе начисляются баллы. С каждым новым полученным рангом у тебя увеличивается постоянная скидка на следующий месяц. Чем выше ранг, тем больше постоянная скидка на следующий месяц.
+                <br><br>
+                <span>Достижения</span> не носят обязательный характер, но являются отличным способом увеличения общей скидки на следующий месяц. В начале каждого следующего месяца раздел «достижения» обновляется. 
+                <br><br>
+                <span>Интенсивность</span> обучения  это система, определяющая твой минимум, который ты готов выполнять ежедневно. Ты можешь настроить её сам, просто кликнув на необходимую тебе категорию, либо она настраивается  автоматически при помощи ИИ. Также ты можешь ВКЛ/ВЫКЛ уведомления, которые напоминают тебе ежедневно о важности непрерывного обучения и о выполнении заданного тебе минимума. 
+                <br><br>
+                <span>Office-hours</span> является разделом, в котором отражается количество имеющихся у тебя часов индивидуальных занятий.  Индивидуальные занятия ты назначаешь сам в удобное для тебя время. Ты сам выбираешь преподавателя из имеющегося списка. Количество доступных часов индивидуальных занятий по подписке  составляет 4 часа или 240 минут.</p>
         </div>
     </div>
 </section>

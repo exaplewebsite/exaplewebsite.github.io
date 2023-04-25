@@ -5,6 +5,7 @@ $('.achievements__list').slick({
     arrows: false,
     swipeToSlide: true,
     mobileFirst: true,
-    speed: 500
+    speed: 500,
+    slidesToScroll: 3
 });
 });
