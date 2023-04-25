@@ -24,9 +24,8 @@ const nightBar = document.querySelector(".rank__progress__bar");
 const nightInformation = document.querySelector("information__window");
 let isChoosen = false;
 let choosenElement;
-let clientID = 429272623;
+let clientID = window.Telegram.WebApp.WebAppUser.id;
 let night = false;
-console.log(window.Telegram.WebApp.themeParams.bg_color);
 function findDate(data){
     let year =data[0].toString() + data[1].toString() + data[2].toString() + data[3].toString();
     let month = parseInt(data[5].toString() + data[6].toString()) - 1;
