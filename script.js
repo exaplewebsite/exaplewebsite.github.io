@@ -26,6 +26,7 @@ let isChoosen = false;
 let choosenElement;
 let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
 let night = false;
+
 function findDate(data){
     let year =data[0].toString() + data[1].toString() + data[2].toString() + data[3].toString();
     let month = parseInt(data[5].toString() + data[6].toString()) - 1;
@@ -88,7 +89,11 @@ async function get(){
     rankImage.src = rankIcon;
     rankLower.textContent = rankLowerBound;
     rankUpper.textContent = rankUpperBound;
-    rankValue.textContent = rankPoints;
+    if(rankPoints == rankUpperBound || rankPoints == rankLowerBound){
+        rankValue.textContent = "";
+    }else{
+        rankValue.textContent = rankPoints;
+    }
     let rankPercentage = ((rankPoints - rankLowerBound)/((rankUpperBound - rankLowerBound)/100)).toString();
     rankCompleteBar.style.width = rankPercentage + '%';
     rankCurrentName.textContent = rankName;
@@ -140,8 +145,6 @@ async function postNotification(state) {
     return response.json();
 }
 
-window.addEventListener("DOMContentLoaded", get);
-
 const fadeIn = (el, timeout, display) =>{
     el.style.opacity = 0;
     el.style.display = display || 'block';
@@ -150,15 +153,6 @@ const fadeIn = (el, timeout, display) =>{
         el.style.opacity = 1;
     }, 10);
 };
-
-notificationButton.addEventListener("click", function() {
-    if(notificationButton.checked){
-        postNotification('on');
-        console.log("on");
-    }else{
-        postNotification('off');
-    }
-})
 
 const fadeOut = (el, timeout) =>{
     el.style.opacity = 1;
@@ -169,6 +163,21 @@ const fadeOut = (el, timeout) =>{
         el.style.display = 'none';
     },timeout);
 };
+
+window.addEventListener("DOMContentLoaded", get);
+
+if(window.Telegram.WebApp.colorScheme == "dark"){
+    night = true;
+}
+
+notificationButton.addEventListener("click", function() {
+    if(notificationButton.checked){
+        postNotification('on');
+        console.log("on");
+    }else{
+        postNotification('off');
+    }
+})
 
 if(night){
     text.forEach(el => {
