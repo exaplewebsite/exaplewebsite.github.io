@@ -36,7 +36,7 @@
   margin: 0 auto;
 }
 .rank__name__img {
-  width: 100px;
+  width: 110px;
 }
 .rank__name__text {
   display: flex;
@@ -148,7 +148,7 @@
   color: #000000;
 }
 .achievements__list__item__text img {
-  width: 70px;
+  width: 75px;
 }
 
 .sale {
@@ -358,6 +358,9 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+.office-hours__icons__clock {
+  width: 90px;
 }
 
 .subscription {

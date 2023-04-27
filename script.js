@@ -22,6 +22,7 @@ const notificationButton = document.querySelector(".intensity__notifications__bt
 const text = document.querySelectorAll(".text");
 const nightBar = document.querySelector(".rank__progress__bar");
 const nightInformation = document.querySelector("information__window");
+const hoursName = document.getElementById("hours");
 let isChoosen = false;
 let choosenElement;
 let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
@@ -42,7 +43,6 @@ async function get(){
     const r = await fetch('https://api.innoprog.ru:3000/rank/' + clientID);
     const disc = await fetch('https://api.innoprog.ru:3000/discount/' + clientID);
     const ach = await fetch('https://api.innoprog.ru:3000/achievement/' + clientID);
-    const ae = await fetch('https://api.innoprog.ru:3000/subscription/' + clientID)
     const achievements = await ach.json();
     const subscription = await sub.json();
     const rank = await r.json();
@@ -111,6 +111,13 @@ async function get(){
     } else{
         daysName.textContent = "дней";
     }
+    if((hours - (days * 24)) % 10 == 1){
+        hoursName.textContent = "час";
+    }else if ((hours - (days * 24)) % 10 < 5){
+        hoursName.textContent = "часа";
+    }else{
+        hoursName.textContent = "часов";
+    }
     achievements.achievements.forEach(el => {
         const item = document.getElementById(el.id);
         item.src = "img/" + el.id + ".svg"; 
@@ -130,8 +137,8 @@ async function postIntensity(intensity) {
     });
     return response.json();
 }
-async function postNotification(state) {
-    const response = await fetch("https://api.innoprog.ru:3000/notifications/" + clientID, {
+async function postNotifications(state) {
+    const r = await fetch("https://api.innoprog.ru:3000/notifications/" + clientID, {
     method: "POST", 
     headers: {
         'Accept': 'aplication/json',
@@ -142,7 +149,7 @@ async function postNotification(state) {
         intensity: state
     })
     });
-    return response.json();
+    return r.json();
 }
 
 const fadeIn = (el, timeout, display) =>{
@@ -171,12 +178,13 @@ if(window.Telegram.WebApp.colorScheme == "dark"){
 }
 
 notificationButton.addEventListener("click", function() {
+    let state;
     if(notificationButton.checked){
-        postNotification('on');
-        console.log("on");
+        state = 'on';
     }else{
-        postNotification('off');
+        state = 'off';
     }
+    postNotifications(state);
 })
 
 if(night){
