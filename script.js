@@ -25,7 +25,7 @@ const nightInformation = document.querySelector("information__window");
 const hoursName = document.getElementById("hours");
 let isChoosen = false;
 let choosenElement;
-let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
+let clientID = 1086925635;
 let night = false;
 
 function findDate(data){
@@ -146,7 +146,7 @@ async function postNotifications(state) {
     },
     mode: 'no-cors',
     body: JSON.stringify({    
-        intensity: state
+        notifications: state
     })
     });
     return r.json();
