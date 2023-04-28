@@ -111,11 +111,14 @@ async function get(){
     } else{
         daysName.textContent = "дней";
     }
-    if((hours - (days * 24)) % 10 == 1){
+    if((hours - (days * 24)) == 1 || (hours - (days * 24)) == 21){
         hoursName.textContent = "час";
-    }else if ((hours - (days * 24)) % 10 < 5){
+    }else if ((hours - (days * 24)) < 5){
         hoursName.textContent = "часа";
-    }else{
+    }else if((hours - (days * 24)) == 22 || (hours - (days * 24)) == 23 || (hours - (days * 24)) == 24){
+        hoursName.textContent = "часа";
+    }
+    else{
         hoursName.textContent = "часов";
     }
     achievements.achievements.forEach(el => {
