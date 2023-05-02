@@ -23,10 +23,24 @@ const text = document.querySelectorAll(".text");
 const nightBar = document.querySelector(".rank__progress__bar");
 const nightInformation = document.querySelector("information__window");
 const hoursName = document.getElementById("hours");
+const achievementIcons = document.querySelectorAll(".achievements__list__item__text");
+const achOne = document.getElementById("ach_1");
+const achTwo = document.getElementById("ach_2");
+const achThree = document.getElementById("ach_3");
+const achFour = document.getElementById("ach_4");
+const achFive = document.getElementById("ach_5");
+const achSix = document.getElementById("ach_6");
+const informationText = document.getElementById("inf");
+const sale = document.querySelector(".sale");
+const intensityBlock = document.querySelector(".intensity");
+const officeHoursBlock = document.querySelector(".office-hours");
+const subscriptionBlock = document.querySelector(".subscription");
+const rankProgressBar = document.querySelector(".rank__progress__bar");
 let isChoosen = false;
 let choosenElement;
-let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
+let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;;
 let night = false;
+let choosenAch = informationText;
 
 function findDate(data){
     let year =data[0].toString() + data[1].toString() + data[2].toString() + data[3].toString();
@@ -57,7 +71,6 @@ async function get(){
     let officeHours = subscription.subscriptions[0].remaining_office_hours;
     let finishDate = subscription.subscriptions[0].finish_date;
     let startDate = subscription.subscriptions[0].start_date;
-    let rankIcon = rank.icon;
     let rankLowerBound = rank.lower_bound;
     let rankUpperBound = rank.upper_bound;
     let rankPoints = rank.points;
@@ -86,16 +99,22 @@ async function get(){
             break;
     }
     officeHoursNumber.textContent = officeHours;
-    rankImage.src = rankIcon;
+    rankImage.src = "img/" + rank.rank + ".png";
     rankLower.textContent = rankLowerBound;
     rankUpper.textContent = rankUpperBound;
-    if(rankPoints == rankUpperBound || rankPoints == rankLowerBound){
-        rankValue.textContent = "";
-    }else{
-        rankValue.textContent = rankPoints;
-    }
     let rankPercentage = ((rankPoints - rankLowerBound)/((rankUpperBound - rankLowerBound)/100)).toString();
     rankCompleteBar.style.width = rankPercentage + '%';
+    if(rankPoints == rankUpperBound || rankPoints == rankLowerBound){
+        rankValue.textContent = '';
+    }else{
+        rankValue.textContent = rankPoints;
+        if(rankCompleteBar.clientWidth < rankLower.clientWidth + rankValue.clientWidth){
+        rankLower.textContent = '';
+        }
+        if(rankProgressBar.clientWidth - rankCompleteBar.clientWidth < rankUpper.clientWidth + rankValue.clientWidth){
+            rankUpper.textContent = '';
+        }
+    }
     rankCurrentName.textContent = rankName;
     saleValue.textContent = discountValue + "%";
     let period = startDate[8].toString() + startDate[9].toString() + "." + startDate[5].toString() + startDate[6].toString() + "." + startDate[2].toString() + startDate[3].toString() + " - " + finishDate[8].toString() + finishDate[9].toString() + "." + finishDate[5].toString() + finishDate[6].toString() + "." + finishDate[2].toString() + finishDate[3].toString();
@@ -124,7 +143,15 @@ async function get(){
     achievements.achievements.forEach(el => {
         const item = document.getElementById(el.id);
         item.src = "img/" + el.id + ".svg"; 
-    })    
+    })
+    if(hours <= 0){
+        intensityBlock.style.display = 'none';
+        officeHoursBlock.style.display = 'none';
+        subscriptionBlock.style.display = 'none';
+        if(discount.discount == 0){
+            sale.style.display = 'none';
+        }   
+    }
 }
 async function postIntensity(intensity) {
     const response = await fetch("https://api.innoprog.ru:3000/intensity/" + clientID, {
@@ -197,6 +224,61 @@ if(night){
     nightBar.classList.add("night");
 }
 
+achievementIcons.forEach(el => {
+    el.addEventListener("click", function(){
+        switch (el.id){
+            case 'one':
+                achOne.style.display = 'block';
+                if(choosenAch != achOne){
+                    choosenAch.style.display = 'none';
+                }
+                choosenAch = achOne;
+                fadeIn(informationWindow, 1000);
+                break;
+            case 'two':
+                achTwo.style.display = 'block';
+                if(choosenAch != achTwo){
+                    choosenAch.style.display = 'none';
+                }
+                fadeIn(informationWindow, 1000);
+                choosenAch = achTwo;
+                break;
+            case 'three':
+                achThree.style.display = 'block';
+                if(choosenAch != achThree){
+                    choosenAch.style.display = 'none';
+                }
+                fadeIn(informationWindow, 1000);
+                choosenAch = achThree;
+                break;
+            case 'four':
+                achFour.style.display = 'block';
+                if(choosenAch != achFour){
+                    choosenAch.style.display = 'none';
+                }
+                fadeIn(informationWindow, 1000);
+                choosenAch = achFour;
+                break;
+            case 'five':
+                achFive.style.display = 'block';
+                if(choosenAch != achFive){
+                    choosenAch.style.display = 'none';
+                }
+                fadeIn(informationWindow, 1000);
+                choosenAch = achFive;
+                break;
+            case 'six':
+                achSix.style.display = 'block';
+                if(choosenAch != achSix){
+                    choosenAch.style.display = 'none';
+                }
+                fadeIn(informationWindow, 1000);
+                choosenAch = achSix;
+                break;    
+        }
+    })
+})
+
 intensityButtons.forEach(e => {
     e.addEventListener("click", function() {
         if (isChoosen){
@@ -219,6 +301,11 @@ intensityButtons.forEach(e => {
 
 informationButton.addEventListener("click", function() {
     fadeIn(informationWindow, 1000);
+    informationText.style.display = 'block';
+    if(choosenAch != informationText){
+        choosenAch.style.display = 'none';
+    }
+    choosenAch = informationText;
 })
 
 informationClose.addEventListener("click", function() {

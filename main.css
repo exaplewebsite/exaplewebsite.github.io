@@ -156,29 +156,24 @@
   text-align: center;
 }
 .sale__upper-stickers {
-  width: 90%;
+  width: 200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  transform: translateY(30%);
+  transform: translateY(10px);
 }
-.sale__upper-stickers span {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 55px;
-  line-height: 55px;
-}
-.sale__lower-stickers {
-  width: 100%;
+.sale__middle-stickers {
+  width: 300px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  transform: translateY(-30px);
 }
-.sale__lower-stickers span {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 55px;
-  line-height: 55px;
+.sale__lower-stickers {
+  width: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-10px);
 }
 .sale h2 {
   font-family: "Rubik";
@@ -186,7 +181,6 @@
   font-weight: 400;
   font-size: 80px;
   line-height: 82px;
-  transform: translateY(-30%);
   text-shadow: -1px 0px 0px #000000, 1px 0px 0px #000000, 0px -1px 0px #000000, 7px 5px 4px rgba(0, 0, 0, 0.3);
   color: #FF0000;
 }
@@ -198,7 +192,7 @@
   line-height: 24px;
   text-align: center;
   color: #1E1E1E;
-  transform: translateY(-20px);
+  transform: translateY(-10px);
 }
 
 .intensity__head {
@@ -436,12 +430,11 @@
 .information__window {
   position: fixed;
   width: 100%;
-  height: 90vh;
   background-color: #fff;
-  top: 5vh;
+  top: 20vh;
   border-radius: 20px;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
 }
 .information__window p {
@@ -452,6 +445,7 @@
   color: #000000;
   width: 90%;
   margin: 0 auto;
+  padding: 10px;
 }
 .information__window span {
   font-family: "Montserrat";
@@ -490,4 +484,38 @@
 
 .rank__progress__bar.night {
   background-color: #fff;
+}
+
+#inf {
+  display: none;
+}
+
+#ach_1 {
+  display: none;
+  font-size: 15px;
+}
+
+#ach_2 {
+  display: none;
+  font-size: 15px;
+}
+
+#ach_3 {
+  display: none;
+  font-size: 15px;
+}
+
+#ach_4 {
+  display: none;
+  font-size: 15px;
+}
+
+#ach_5 {
+  display: none;
+  font-size: 15px;
+}
+
+#ach_6 {
+  display: none;
+  font-size: 15px;
 }/*# sourceMappingURL=main.css.map */
