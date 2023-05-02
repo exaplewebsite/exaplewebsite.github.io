@@ -37,7 +37,7 @@ const officeHoursBlock = document.querySelector(".office-hours");
 const subscriptionBlock = document.querySelector(".subscription");
 let isChoosen = false;
 let choosenElement;
-let clientID = 1086925635;
+let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
 let night = false;
 let choosenAch = informationText;
 
