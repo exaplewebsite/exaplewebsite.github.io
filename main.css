@@ -431,7 +431,7 @@
   position: fixed;
   width: 100%;
   background-color: #fff;
-  top: 20vh;
+  top: 4vh;
   border-radius: 20px;
   display: flex;
   justify-content: center;
@@ -518,4 +518,8 @@
 #ach_6 {
   display: none;
   font-size: 15px;
+}
+
+.information__window.active {
+  top: 30%;
 }/*# sourceMappingURL=main.css.map */

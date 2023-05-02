@@ -21,7 +21,7 @@ const daysName = document.getElementById("days");
 const notificationButton = document.querySelector(".intensity__notifications__btn__click");
 const text = document.querySelectorAll(".text");
 const nightBar = document.querySelector(".rank__progress__bar");
-const nightInformation = document.querySelector("information__window");
+const nightInformation = document.querySelector(".information__window");
 const hoursName = document.getElementById("hours");
 const achievementIcons = document.querySelectorAll(".achievements__list__item__text");
 const achOne = document.getElementById("ach_1");
@@ -35,10 +35,9 @@ const sale = document.querySelector(".sale");
 const intensityBlock = document.querySelector(".intensity");
 const officeHoursBlock = document.querySelector(".office-hours");
 const subscriptionBlock = document.querySelector(".subscription");
-const rankProgressBar = document.querySelector(".rank__progress__bar");
 let isChoosen = false;
 let choosenElement;
-let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;;
+let clientID = 1086925635;
 let night = false;
 let choosenAch = informationText;
 
@@ -99,7 +98,32 @@ async function get(){
             break;
     }
     officeHoursNumber.textContent = officeHours;
-    rankImage.src = "img/" + rank.rank + ".png";
+    switch(rank.rank){
+        case 'Незнайка':
+            rankImage.src = "img/firstRank.png";
+            break;
+        case 'Винни-пух':
+            rankImage.src = "img/secondRank.png";
+            break;
+        case 'Иван-новичок':
+            rankImage.src = "img/thirdRank.png";
+            break;    
+        case 'Карлсон':
+            rankImage.src = "img/fourthRank.png";
+            break;
+        case 'Кот Матроскин':
+            rankImage.src = "img/fifthRank.png";
+            break;
+        case 'Попугай Кеша':
+            rankImage.src = "img/sixthRank.png";
+            break;
+        case 'Пятачок':
+            rankImage.src = "img/seventhRank.png";
+            break;
+        case 'Чебурашка':
+            rankImage.src = "img/eighthRank.png";
+            break;
+    }
     rankLower.textContent = rankLowerBound;
     rankUpper.textContent = rankUpperBound;
     let rankPercentage = ((rankPoints - rankLowerBound)/((rankUpperBound - rankLowerBound)/100)).toString();
@@ -111,7 +135,7 @@ async function get(){
         if(rankCompleteBar.clientWidth < rankLower.clientWidth + rankValue.clientWidth){
         rankLower.textContent = '';
         }
-        if(rankProgressBar.clientWidth - rankCompleteBar.clientWidth < rankUpper.clientWidth + rankValue.clientWidth){
+        if(nightBar.clientWidth - rankCompleteBar.clientWidth < rankUpper.clientWidth + rankValue.clientWidth){
             rankUpper.textContent = '';
         }
     }
@@ -232,6 +256,7 @@ achievementIcons.forEach(el => {
                 if(choosenAch != achOne){
                     choosenAch.style.display = 'none';
                 }
+                nightInformation.classList.add("active");
                 choosenAch = achOne;
                 fadeIn(informationWindow, 1000);
                 break;
@@ -240,6 +265,7 @@ achievementIcons.forEach(el => {
                 if(choosenAch != achTwo){
                     choosenAch.style.display = 'none';
                 }
+                nightInformation.classList.add("active");
                 fadeIn(informationWindow, 1000);
                 choosenAch = achTwo;
                 break;
@@ -248,6 +274,7 @@ achievementIcons.forEach(el => {
                 if(choosenAch != achThree){
                     choosenAch.style.display = 'none';
                 }
+                nightInformation.classList.add("active");
                 fadeIn(informationWindow, 1000);
                 choosenAch = achThree;
                 break;
@@ -256,6 +283,7 @@ achievementIcons.forEach(el => {
                 if(choosenAch != achFour){
                     choosenAch.style.display = 'none';
                 }
+                nightInformation.classList.add("active");
                 fadeIn(informationWindow, 1000);
                 choosenAch = achFour;
                 break;
@@ -264,6 +292,7 @@ achievementIcons.forEach(el => {
                 if(choosenAch != achFive){
                     choosenAch.style.display = 'none';
                 }
+                nightInformation.classList.add("active");
                 fadeIn(informationWindow, 1000);
                 choosenAch = achFive;
                 break;
@@ -272,6 +301,7 @@ achievementIcons.forEach(el => {
                 if(choosenAch != achSix){
                     choosenAch.style.display = 'none';
                 }
+                nightInformation.classList.add("active");
                 fadeIn(informationWindow, 1000);
                 choosenAch = achSix;
                 break;    
@@ -300,6 +330,7 @@ intensityButtons.forEach(e => {
 })
 
 informationButton.addEventListener("click", function() {
+    nightInformation.classList.remove("active");
     fadeIn(informationWindow, 1000);
     informationText.style.display = 'block';
     if(choosenAch != informationText){
