@@ -156,24 +156,27 @@
   text-align: center;
 }
 .sale__upper-stickers {
-  width: 200px;
+  width: 70%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   transform: translateY(10px);
+  align-items: center;
 }
 .sale__middle-stickers {
-  width: 300px;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .sale__lower-stickers {
-  width: 200px;
+  width: 70%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   transform: translateY(-10px);
+  align-items: center;
 }
 .sale h2 {
   font-family: "Rubik";

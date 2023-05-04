@@ -1,6 +1,6 @@
 $(document).ready(function(){
 $('.achievements__list').slick({
-    infinite: true,
+    infinite: false,
     slidesToShow: 3,
     arrows: false,
     swipeToSlide: true,

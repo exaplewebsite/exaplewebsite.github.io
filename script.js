@@ -166,7 +166,7 @@ async function get(){
     }
     achievements.achievements.forEach(el => {
         const item = document.getElementById(el.id);
-        item.src = "img/" + el.id + ".svg"; 
+        item.src = "img/" + el.id + ".png"; 
     })
     if(hours <= 0){
         intensityBlock.style.display = 'none';
