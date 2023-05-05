@@ -198,6 +198,9 @@
   transform: translateY(-10px);
 }
 
+.intensity {
+  margin-top: 10px;
+}
 .intensity__head {
   display: flex;
   align-items: center;

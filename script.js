@@ -105,7 +105,12 @@ async function get(){
     }
     rankCurrentName.textContent = rankName;
     let discountValue = discount.discount;
-    saleValue.textContent = discountValue + "%";
+    if(discountValue != 0){
+        saleValue.textContent = discountValue + "%";
+    }else{
+        sale.style.display = 'none';
+    }
+    
     achievements.achievements.forEach(el => {
         const item = document.getElementById(el.id);
         item.src = "img/" + el.id + ".png"; 
@@ -179,9 +184,6 @@ async function get(){
             intensityBlock.style.display = 'none';
             officeHoursBlock.style.display = 'none';
             subscriptionBlock.style.display = 'none';
-            if(discount.discount == 0){
-                sale.style.display = 'none';
-            }   
         }
     }
 }
