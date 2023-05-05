@@ -52,52 +52,12 @@ function findDate(data){
 }
 
 async function get(){
-    const sub = await fetch('https://api.innoprog.ru:3000/subscription/' + clientID);
     const r = await fetch('https://api.innoprog.ru:3000/rank/' + clientID);
-    const disc = await fetch('https://api.innoprog.ru:3000/discount/' + clientID);
-    const ach = await fetch('https://api.innoprog.ru:3000/achievement/' + clientID);
-    const achievements = await ach.json();
-    const subscription = await sub.json();
     const rank = await r.json();
-    const discount = await disc.json();
-    let intensity = subscription.subscriptions[0].intensity;
-    let notifications = subscription.subscriptions[0].notifications;
-    if(notifications == 'off'){
-        notificationButton.checked = false;
-    }else{
-        notificationButton.checked = true;
-    }
-    let officeHours = subscription.subscriptions[0].remaining_office_hours;
-    let finishDate = subscription.subscriptions[0].finish_date;
-    let startDate = subscription.subscriptions[0].start_date;
     let rankLowerBound = rank.lower_bound;
     let rankUpperBound = rank.upper_bound;
     let rankPoints = rank.points;
     let rankName = rank.rank;
-    let discountValue = discount.discount;
-    switch (intensity){
-        case 'Базовая':
-            isChoosen = true;
-            choosenElement = firstIntensity;
-            firstIntensity.classList.add("active");
-            break;
-        case "Лёгкая":
-            isChoosen = true;
-            choosenElement = secondIntensity;
-            secondIntensity.classList.add("active");
-            break;
-        case "Обычная":
-            isChoosen = true;
-            choosenElement = thirdIntensity;
-            thirdIntensity.classList.add("active");
-            break;
-        case "Интенсивная":
-            isChoosen = true;
-            choosenElement = fourthIntensity;
-            fourthIntensity.classList.add("active");
-            break;
-    }
-    officeHoursNumber.textContent = officeHours;
     switch(rank.rank){
         case 'Незнайка':
             rankImage.src = "img/firstRank.png";
@@ -140,41 +100,94 @@ async function get(){
         }
     }
     rankCurrentName.textContent = rankName;
-    saleValue.textContent = discountValue + "%";
-    let period = startDate[8].toString() + startDate[9].toString() + "." + startDate[5].toString() + startDate[6].toString() + "." + startDate[2].toString() + startDate[3].toString() + " - " + finishDate[8].toString() + finishDate[9].toString() + "." + finishDate[5].toString() + finishDate[6].toString() + "." + finishDate[2].toString() + finishDate[3].toString();
-    subscriptionPeriod.textContent = period;
-    let hours = findDate(finishDate);
-    let days = Math.floor(hours / 24);
-    subscriptionDay.textContent = days;
-    subscriptionHour.textContent = hours - (days * 24);
-    if(days % 10 == 1){
-        daysName.textContent = "день";
-    } else if (days % 10 < 5){
-        daysName.textContent = "дня";
-    } else{
-        daysName.textContent = "дней";
-    }
-    if((hours - (days * 24)) == 1 || (hours - (days * 24)) == 21){
-        hoursName.textContent = "час";
-    }else if ((hours - (days * 24)) < 5){
-        hoursName.textContent = "часа";
-    }else if((hours - (days * 24)) == 22 || (hours - (days * 24)) == 23 || (hours - (days * 24)) == 24){
-        hoursName.textContent = "часа";
-    }
-    else{
-        hoursName.textContent = "часов";
-    }
-    achievements.achievements.forEach(el => {
-        const item = document.getElementById(el.id);
-        item.src = "img/" + el.id + ".png"; 
-    })
-    if(hours <= 0){
+    let disc;
+    let ach;
+    let sub;
+    try{
+        disc = await fetch('https://api.innoprog.ru:3000/discount/' + clientID);
+        ach = await fetch('https://api.innoprog.ru:3000/achievement/' + clientID);
+        sub = await fetch('https://api.innoprog.ru:3000/subscription/' + clientID);
+    }catch{
         intensityBlock.style.display = 'none';
         officeHoursBlock.style.display = 'none';
         subscriptionBlock.style.display = 'none';
-        if(discount.discount == 0){
-            sale.style.display = 'none';
-        }   
+        sale.style.display = 'none';
+    
+    }
+    if(sub.ok && disc.ok && ach.ok){
+        const achievements = await ach.json();
+        const subscription = await sub.json();
+        const discount = await disc.json();
+        let intensity = subscription.subscriptions[0].intensity;
+        let notifications = subscription.subscriptions[0].notifications;
+        if(notifications == 'off'){
+            notificationButton.checked = false;
+        }else{
+            notificationButton.checked = true;
+        }
+        let officeHours = subscription.subscriptions[0].remaining_office_hours;
+        let finishDate = subscription.subscriptions[0].finish_date;
+        let startDate = subscription.subscriptions[0].start_date;
+        let discountValue = discount.discount;
+        switch (intensity){
+            case 'Базовая':
+                isChoosen = true;
+                choosenElement = firstIntensity;
+                firstIntensity.classList.add("active");
+                break;
+            case "Лёгкая":
+                isChoosen = true;
+                choosenElement = secondIntensity;
+                secondIntensity.classList.add("active");
+                break;
+            case "Обычная":
+                isChoosen = true;
+                choosenElement = thirdIntensity;
+                thirdIntensity.classList.add("active");
+                break;
+            case "Интенсивная":
+                isChoosen = true;
+                choosenElement = fourthIntensity;
+                fourthIntensity.classList.add("active");
+                break;
+        }
+        officeHoursNumber.textContent = officeHours;
+        saleValue.textContent = discountValue + "%";
+        let period = startDate[8].toString() + startDate[9].toString() + "." + startDate[5].toString() + startDate[6].toString() + "." + startDate[2].toString() + startDate[3].toString() + " - " + finishDate[8].toString() + finishDate[9].toString() + "." + finishDate[5].toString() + finishDate[6].toString() + "." + finishDate[2].toString() + finishDate[3].toString();
+        subscriptionPeriod.textContent = period;
+        let hours = findDate(finishDate);
+        let days = Math.floor(hours / 24);
+        subscriptionDay.textContent = days;
+        subscriptionHour.textContent = hours - (days * 24);
+        if(days % 10 == 1){
+            daysName.textContent = "день";
+        } else if (days % 10 < 5){
+            daysName.textContent = "дня";
+        } else{
+            daysName.textContent = "дней";
+        }
+        if((hours - (days * 24)) == 1 || (hours - (days * 24)) == 21){
+            hoursName.textContent = "час";
+        }else if ((hours - (days * 24)) < 5){
+            hoursName.textContent = "часа";
+        }else if((hours - (days * 24)) == 22 || (hours - (days * 24)) == 23 || (hours - (days * 24)) == 24){
+            hoursName.textContent = "часа";
+        }
+        else{
+            hoursName.textContent = "часов";
+        }
+        achievements.achievements.forEach(el => {
+            const item = document.getElementById(el.id);
+            item.src = "img/" + el.id + ".png"; 
+        })
+        if(hours <= 0){
+            intensityBlock.style.display = 'none';
+            officeHoursBlock.style.display = 'none';
+            subscriptionBlock.style.display = 'none';
+            if(discount.discount == 0){
+                sale.style.display = 'none';
+            }   
+        }
     }
 }
 async function postIntensity(intensity) {
