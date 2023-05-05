@@ -156,9 +156,11 @@ async function get(){
         let days = Math.floor(hours / 24);
         subscriptionDay.textContent = days;
         subscriptionHour.textContent = hours - (days * 24);
-        if(days % 10 == 1){
+        if(days % 10 == 1 && days != 11){
             daysName.textContent = "день";
-        } else if (days % 10 < 5){
+        }else if(days < 21 && days > 4){
+            daysName.textContent = "дней";
+        } else if (days % 10 < 5 && days % 10 > 0){
             daysName.textContent = "дня";
         } else{
             daysName.textContent = "дней";
