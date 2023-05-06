@@ -35,6 +35,9 @@ const sale = document.querySelector(".sale");
 const intensityBlock = document.querySelector(".intensity");
 const officeHoursBlock = document.querySelector(".office-hours");
 const subscriptionBlock = document.querySelector(".subscription");
+const achievementParagraph = document.querySelector(".achievements__p");
+const achievementBtn = document.querySelector(".achievements__btn");
+const message = document.querySelector(".message");
 let isChoosen = false;
 let choosenElement;
 let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
@@ -120,18 +123,27 @@ async function get(){
         intensityBlock.style.display = 'none';
         officeHoursBlock.style.display = 'none';
         subscriptionBlock.style.display = 'none';
+        achievementBtn.style.display = 'none';
+        achievementParagraph.textContent = 'получение достижений доступно после оформления подписки';
     }else{
+        const ref = await fetch('https://api.innoprog.ru:3000/referral/' + clientID);
+        const refLink = await ref.json();
+        achievementBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(refLink.link);
+            fadeIn(message, 1000);
+            fadeOut(message, 1000);
+        })
         const subscription = await sub.json();
-        let intensity = subscription.subscriptions[0].intensity;
-        let notifications = subscription.subscriptions[0].notifications;
+        let intensity = subscription.subscriptions[subscription.subscriptions.length - 1].intensity;
+        let notifications = subscription.subscriptions[subscription.subscriptions.length - 1].notifications;
         if(notifications == 'off'){
             notificationButton.checked = false;
         }else{
             notificationButton.checked = true;
         }
-        let officeHours = subscription.subscriptions[0].remaining_office_hours;
-        let finishDate = subscription.subscriptions[0].finish_date;
-        let startDate = subscription.subscriptions[0].start_date;
+        let officeHours = subscription.subscriptions[subscription.subscriptions.length - 1].remaining_office_hours;
+        let finishDate = subscription.subscriptions[subscription.subscriptions.length - 1].finish_date;
+        let startDate = subscription.subscriptions[subscription.subscriptions.length - 1].start_date;
         switch (intensity){
             case 'Базовая':
                 isChoosen = true;
@@ -172,7 +184,9 @@ async function get(){
         }
         if((hours - (days * 24)) == 1 || (hours - (days * 24)) == 21){
             hoursName.textContent = "час";
-        }else if ((hours - (days * 24)) < 5){
+        }else if((hours - (days * 24)) == 0){
+            hoursName.textContent = "часов";
+        } else if ((hours - (days * 24)) < 5){
             hoursName.textContent = "часа";
         }else if((hours - (days * 24)) == 22 || (hours - (days * 24)) == 23 || (hours - (days * 24)) == 24){
             hoursName.textContent = "часа";

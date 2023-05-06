@@ -150,6 +150,31 @@
 .achievements__list__item__text img {
   width: 75px;
 }
+.achievements__p {
+  margin-top: 10px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #1E1E1E;
+}
+.achievements__btn {
+  display: block;
+  margin: 10px auto 0 auto;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #fff;
+  background-color: #9C7CFC;
+  border: 0;
+  padding: 7px;
+  border-radius: 10px;
+}
 
 .sale {
   margin-top: 5px;
@@ -459,6 +484,26 @@
   font-weight: 700;
   font-size: 14px;
   color: #9C7CFC;
+}
+
+.message {
+  display: none;
+  position: fixed;
+  width: 250px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  text-align: center;
+  top: 90%;
+  border: 1px solid black;
+  left: calc(50% - 125px);
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+  margin: 0 auto;
+  padding: 10px;
 }
 
 @media screen and (max-width: 400px) {
