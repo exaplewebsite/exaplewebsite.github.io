@@ -155,7 +155,7 @@
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 24px;
   text-align: center;
   color: #1E1E1E;
@@ -299,6 +299,54 @@
 .intensity__notifications__btn input:checked + .slider:before {
   transform: translateX(13px);
 }
+.intensity__progress {
+  margin-top: 30px;
+}
+.intensity__progress__bar {
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 98%;
+  height: 22px;
+  border-radius: 10px;
+}
+.intensity__progress__bar__complete {
+  background-color: #9C7CFC;
+  height: 22px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: end;
+}
+.intensity__progress__bar__complete__value {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  color: #000000;
+  transform: translateY(30px);
+}
+.intensity__progress__numbers {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.intensity__progress__numbers__zero {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  color: #000000;
+}
+.intensity__progress__numbers__one-hundred {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  color: #000000;
+}
 .intensity__list {
   margin-top: 20px;
   width: 100%;
@@ -309,14 +357,12 @@
   margin: 0 auto;
   margin-top: 10px;
   width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .intensity__list__item button {
+  margin: 0 auto;
   color: white;
   border: 0;
-  width: 80%;
+  width: 100%;
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
@@ -326,14 +372,6 @@
   background: #9C7CFC;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
-}
-.intensity__list__item span {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 30px;
-  color: #000000;
 }
 .intensity__list__item__btn.active {
   background: #59CAC3;
@@ -459,10 +497,11 @@
   cursor: pointer;
 }
 .information__window {
+  height: 70vh;
   position: fixed;
   width: 100%;
   background-color: #fff;
-  top: 4vh;
+  top: 10vh;
   border-radius: 20px;
   display: flex;
   justify-content: center;
@@ -477,6 +516,8 @@
   width: 90%;
   margin: 0 auto;
   padding: 10px;
+  height: 90%;
+  overflow: auto;
 }
 .information__window span {
   font-family: "Montserrat";

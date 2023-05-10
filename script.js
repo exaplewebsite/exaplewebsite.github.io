@@ -21,6 +21,7 @@ const daysName = document.getElementById("days");
 const notificationButton = document.querySelector(".intensity__notifications__btn__click");
 const text = document.querySelectorAll(".text");
 const nightBar = document.querySelector(".rank__progress__bar");
+const intensityBar = document.querySelector(".intensity__progress__bar");
 const nightInformation = document.querySelector(".information__window");
 const hoursName = document.getElementById("hours");
 const achievementIcons = document.querySelectorAll(".achievements__list__item__text");
@@ -38,6 +39,10 @@ const subscriptionBlock = document.querySelector(".subscription");
 const achievementParagraph = document.querySelector(".achievements__p");
 const achievementBtn = document.querySelector(".achievements__btn");
 const message = document.querySelector(".message");
+const intensityLower = document.querySelector(".intensity__progress__numbers__zero");
+const intensityUpper = document.querySelector(".intensity__progress__numbers__one-hundred");
+const intensityValue = document.querySelector(".intensity__progress__bar__complete__value");
+const intensityCompleteBar = document.querySelector(".intensity__progress__bar__complete");
 let isChoosen = false;
 let choosenElement;
 let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
@@ -53,6 +58,22 @@ function findDate(data){
     const endDate = new Date(parseInt(year), month, parseInt(day), parseInt(hour));
     return Math.round((endDate - date)/3600000);
 }
+
+const fadeM = (el, timeout) =>{
+    el.style.opacity = 0;
+    el.style.display = 'block';
+    el.style.transition = `opacity ${timeout}ms`
+    setTimeout(() => {
+        el.style.opacity = 1;
+    }, 10);
+    el.style.opacity = 1;
+    el.style.transition = `opacity ${timeout}ms`
+    el.style.opacity = 0;
+    setTimeout(() => {
+        el.style.opacity = 0;
+    },timeout);
+    
+};
 
 async function get(){
     const r = await fetch('https://api.innoprog.ru:3000/rank/' + clientID);
@@ -130,8 +151,7 @@ async function get(){
         const refLink = await ref.json();
         achievementBtn.addEventListener('click', function() {
             navigator.clipboard.writeText(refLink.link);
-            fadeIn(message, 1000);
-            fadeOut(message, 1000);
+            fadeM(message, 1000);
         })
         const subscription = await sub.json();
         let intensity = subscription.subscriptions[subscription.subscriptions.length - 1].intensity;
@@ -144,27 +164,54 @@ async function get(){
         let officeHours = subscription.subscriptions[subscription.subscriptions.length - 1].remaining_office_hours;
         let finishDate = subscription.subscriptions[subscription.subscriptions.length - 1].finish_date;
         let startDate = subscription.subscriptions[subscription.subscriptions.length - 1].start_date;
+        let intensityUp;
         switch (intensity){
-            case 'Базовая':
+            case 'Базовый':
                 isChoosen = true;
                 choosenElement = firstIntensity;
                 firstIntensity.classList.add("active");
+                intensityUpper.textContent = '15';
+                intensityUp = 15;
                 break;
-            case "Лёгкая":
+            case "Средний":
                 isChoosen = true;
                 choosenElement = secondIntensity;
                 secondIntensity.classList.add("active");
+                intensityUpper.textContent = '30';
+                intensityUp = 30;
                 break;
-            case "Обычная":
+            case "Продвинутый":
                 isChoosen = true;
                 choosenElement = thirdIntensity;
                 thirdIntensity.classList.add("active");
+                intensityUpper.textContent = '60';
+                intensityUp = 60;
                 break;
-            case "Интенсивная":
+            case "Экспертный":
                 isChoosen = true;
                 choosenElement = fourthIntensity;
                 fourthIntensity.classList.add("active");
+                intensityUpper.textContent = '90';
+                intensityUp = 90;
                 break;
+        }
+        let dayPoints = subscription.subscriptions[subscription.subscriptions.length - 1].day_points;
+        let intensityPercentage = Math.floor((dayPoints)/((intensityUp)/100));
+        if(dayPoints > intensityUp){
+            intensityCompleteBar.style.width = '100%';
+        }else{
+            intensityCompleteBar.style.width = intensityPercentage.toString() + '%';
+        }
+        if(dayPoints == 0 || dayPoints >= intensityUp){
+            intensityValue.textContent = '';
+        }else{
+            intensityValue.textContent = dayPoints;
+            if(intensityCompleteBar.clientWidth < intensityLower.clientWidth + intensityValue.clientWidth){
+                intensityLower.textContent = '';
+            }
+            if(intensityBar.clientWidth - intensityCompleteBar.clientWidth < intensityUpper.clientWidth + intensityValue.clientWidth){
+                intensityUpper.textContent = '';
+            }
         }
         officeHoursNumber.textContent = officeHours;
         let period = startDate[8].toString() + startDate[9].toString() + "." + startDate[5].toString() + startDate[6].toString() + "." + startDate[2].toString() + startDate[3].toString() + " - " + finishDate[8].toString() + finishDate[9].toString() + "." + finishDate[5].toString() + finishDate[6].toString() + "." + finishDate[2].toString() + finishDate[3].toString();
@@ -281,6 +328,7 @@ achievementIcons.forEach(el => {
                     choosenAch.style.display = 'none';
                 }
                 nightInformation.classList.add("active");
+                nightInformation.style.height =  "130px";
                 choosenAch = achOne;
                 fadeIn(informationWindow, 1000);
                 break;
@@ -290,6 +338,7 @@ achievementIcons.forEach(el => {
                     choosenAch.style.display = 'none';
                 }
                 nightInformation.classList.add("active");
+                nightInformation.style.height =  "130px";
                 fadeIn(informationWindow, 1000);
                 choosenAch = achTwo;
                 break;
@@ -299,6 +348,7 @@ achievementIcons.forEach(el => {
                     choosenAch.style.display = 'none';
                 }
                 nightInformation.classList.add("active");
+                nightInformation.style.height =  "130px";
                 fadeIn(informationWindow, 1000);
                 choosenAch = achThree;
                 break;
@@ -308,6 +358,7 @@ achievementIcons.forEach(el => {
                     choosenAch.style.display = 'none';
                 }
                 nightInformation.classList.add("active");
+                nightInformation.style.height =  "130px";
                 fadeIn(informationWindow, 1000);
                 choosenAch = achFour;
                 break;
@@ -317,6 +368,7 @@ achievementIcons.forEach(el => {
                     choosenAch.style.display = 'none';
                 }
                 nightInformation.classList.add("active");
+                nightInformation.style.height =  "130px";
                 fadeIn(informationWindow, 1000);
                 choosenAch = achFive;
                 break;
@@ -326,6 +378,7 @@ achievementIcons.forEach(el => {
                     choosenAch.style.display = 'none';
                 }
                 nightInformation.classList.add("active");
+                nightInformation.style.height =  "130px";
                 fadeIn(informationWindow, 1000);
                 choosenAch = achSix;
                 break;    
@@ -355,6 +408,7 @@ intensityButtons.forEach(e => {
 
 informationButton.addEventListener("click", function() {
     nightInformation.classList.remove("active");
+    nightInformation.style.height =  "500px";
     fadeIn(informationWindow, 1000);
     informationText.style.display = 'block';
     if(choosenAch != informationText){
