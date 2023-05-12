@@ -48,6 +48,8 @@ let choosenElement;
 let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
 let night = false;
 let choosenAch = informationText;
+let dayP;
+let intensityPoints = new Array();
 
 function findDate(data){
     let year =data[0].toString() + data[1].toString() + data[2].toString() + data[3].toString();
@@ -140,6 +142,11 @@ async function get(){
         item.src = "img/" + el.id + ".png"; 
     })
     const sub = await fetch('https://api.innoprog.ru:3000/subscription/' + clientID);
+    const int = await fetch('https://api.innoprog.ru:3000/intensities');
+    const intens = await int.json();
+    intens.intensities.forEach(el => {
+        intensityPoints.push(el.points);
+    })
     if(!sub.ok){
         intensityBlock.style.display = 'none';
         officeHoursBlock.style.display = 'none';
@@ -166,36 +173,37 @@ async function get(){
         let startDate = subscription.subscriptions[subscription.subscriptions.length - 1].start_date;
         let intensityUp;
         switch (intensity){
-            case 'Базовый':
+            case 'Базовая':
                 isChoosen = true;
                 choosenElement = firstIntensity;
                 firstIntensity.classList.add("active");
-                intensityUpper.textContent = '15';
-                intensityUp = 15;
+                intensityUpper.textContent = intens.intensities[0].points;
+                intensityUp = parseInt(intens.intensities[0].points);
                 break;
-            case "Средний":
+            case "Средняя":
                 isChoosen = true;
                 choosenElement = secondIntensity;
                 secondIntensity.classList.add("active");
-                intensityUpper.textContent = '30';
-                intensityUp = 30;
+                intensityUpper.textContent = intens.intensities[1].points;
+                intensityUp = parseInt(intens.intensities[1].points);
                 break;
-            case "Продвинутый":
+            case "Продвинутая":
                 isChoosen = true;
                 choosenElement = thirdIntensity;
                 thirdIntensity.classList.add("active");
-                intensityUpper.textContent = '60';
-                intensityUp = 60;
+                intensityUpper.textContent = intens.intensities[2].points;
+                intensityUp = parseInt(intens.intensities[2].points);
                 break;
-            case "Экспертный":
+            case "Экспертная":
                 isChoosen = true;
                 choosenElement = fourthIntensity;
                 fourthIntensity.classList.add("active");
-                intensityUpper.textContent = '90';
-                intensityUp = 90;
+                intensityUpper.textContent = intens.intensities[3].points;
+                intensityUp = parseInt(intens.intensities[3].points);
                 break;
         }
         let dayPoints = subscription.subscriptions[subscription.subscriptions.length - 1].day_points;
+        dayP = dayPoints;
         let intensityPercentage = Math.floor((dayPoints)/((intensityUp)/100));
         if(dayPoints > intensityUp){
             intensityCompleteBar.style.width = '100%';
@@ -311,7 +319,6 @@ notificationButton.addEventListener("click", function() {
     }
     postNotifications(state);
 })
-
 if(night){
     text.forEach(el => {
         el.classList.add("night");
@@ -402,10 +409,42 @@ intensityButtons.forEach(e => {
         let firstLetterCap = firstLetter.toUpperCase();
         let remainingLetters = word.slice(1);
         let capitalizedWord = firstLetterCap + remainingLetters;
+        let intensityU;
+        switch(capitalizedWord){
+            case 'Базовая':
+                intensityU = intensityPoints[0];
+                break;
+            case 'Средняя':
+                intensityU = intensityPoints[1];
+                break;
+            case 'Продвинутая':
+                intensityU = intensityPoints[2]
+                break;
+            case 'Экспертная':
+                intensityU = intensityPoints[3];
+                break;
+        }
+        intensityUpper.textContent = intensityU;
+        let intensityPercentage = Math.floor((dayP)/((intensityU)/100));
+        if(dayP > intensityU){
+            intensityCompleteBar.style.width = '100%';
+        }else{
+            intensityCompleteBar.style.width = intensityPercentage.toString() + '%';
+        }
+        if(dayP == 0 || dayP >= intensityU){
+            intensityValue.textContent = '';
+        }else{
+            intensityValue.textContent = dayP;
+            if(intensityCompleteBar.clientWidth < intensityLower.clientWidth + intensityValue.clientWidth){
+                intensityLower.textContent = '';
+            }
+            if(intensityBar.clientWidth - intensityCompleteBar.clientWidth < intensityUpper.clientWidth + intensityValue.clientWidth){
+                intensityUpper.textContent = '';
+            }
+        }
         postIntensity(capitalizedWord);
     })
 })
-
 informationButton.addEventListener("click", function() {
     nightInformation.classList.remove("active");
     nightInformation.style.height =  "500px";
