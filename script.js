@@ -324,6 +324,7 @@ if(night){
         el.classList.add("night");
     })
     nightBar.classList.add("night");
+    intensityBar.classList.add("night");
 }
 
 achievementIcons.forEach(el => {
