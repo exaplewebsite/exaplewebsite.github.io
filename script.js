@@ -276,6 +276,13 @@ async function get(){
             subscriptionBlock.style.display = 'none';
         }
     }
+    if(window.Telegram.WebApp.colorScheme == "dark"){
+        text.forEach(el => {
+            el.classList.add("night");
+        })
+        nightBar.classList.add("night");
+        intensityBar.classList.add("night");
+    }
 }
 async function postIntensity(intensity) {
     const response = await fetch("https://api.innoprog.ru:3000/intensity/" + clientID, {
@@ -327,10 +334,6 @@ const fadeOut = (el, timeout) =>{
 
 window.addEventListener("DOMContentLoaded", get);
 
-if(window.Telegram.WebApp.colorScheme == "dark"){
-    night = true;
-}
-
 notificationButton.addEventListener("click", function() {
     let state;
     if(notificationButton.checked){
@@ -340,13 +343,6 @@ notificationButton.addEventListener("click", function() {
     }
     postNotifications(state);
 })
-if(night){
-    text.forEach(el => {
-        el.classList.add("night");
-    })
-    nightBar.classList.add("night");
-    intensityBar.classList.add("night");
-}
 
 achievementIcons.forEach(el => {
     el.addEventListener("click", function(){
