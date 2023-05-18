@@ -43,6 +43,15 @@ const intensityLower = document.querySelector(".intensity__progress__numbers__ze
 const intensityUpper = document.querySelector(".intensity__progress__numbers__one-hundred");
 const intensityValue = document.querySelector(".intensity__progress__bar__complete__value");
 const intensityCompleteBar = document.querySelector(".intensity__progress__bar__complete");
+const achievementsList = document.querySelector(".achievements__list");
+const achievementsListItem = document.querySelectorAll(".achievements__list__item");
+const firstAchievementsContent = '<div id="one" class="achievements__list__item__text"><img id="1" src="img/seven-days-g.png" alt="7 in row"> <span class="text">7 дней вряд</span></div>';
+const secondAchievementsContent = '<div id="two" class="achievements__list__item__text"><img id="2" src="img/fourteen-days-g.png" alt="14 in row"> <span class="text">14 дней вряд</span></div>';
+const thirdAchievementsContent = '<div id="three" class="achievements__list__item__text"><img id="3" src="img/twenty-one-days-g.png" alt="21 in row"> <span class="text">21 день вряд</span></div>';
+const fourthAchievementsContent = '<div id="four" class="achievements__list__item__text"><img id="4" src="img/invite-friend-g.png" alt="invite friend"> <span class="text">Друзья навеки</span></div>';
+const fifthAchievementsContent = '<div id="five" class="achievements__list__item__text"><img id="5" src="img/own-g.png" alt="without office hours"> <span class="text">Без office hours</span></div>';
+const sixthAchievementsContent = '<div id="six" class="achievements__list__item__text"><img id="6" src="img/complete-module-g.png" alt="complete module"> <span class="text">Завершил модуль</span></div>';
+const achievementsContent = [firstAchievementsContent, secondAchievementsContent, thirdAchievementsContent, fourthAchievementsContent, fifthAchievementsContent, sixthAchievementsContent];
 let isChoosen = false;
 let choosenElement;
 let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
@@ -84,6 +93,7 @@ async function get(){
     const rank = await r.json();
     const achievements = await ach.json();
     const discount = await disc.json();
+    let achievementsArray = [false, false, false, false, false, false];
     let rankLowerBound = rank.lower_bound;
     let rankUpperBound = rank.upper_bound;
     let rankPoints = rank.points;
@@ -136,11 +146,22 @@ async function get(){
     }else{
         sale.style.display = 'none';
     }
-    
+    let achCount = 1;
     achievements.achievements.forEach(el => {
-        const item = document.getElementById(el.id);
-        item.src = "img/" + el.id + ".png"; 
+        const item = document.getElementById('achItem_' + achCount.toString());
+        item.insertAdjacentHTML("afterbegin", achievementsContent[el.id - 1]);
+        const itemImg = document.getElementById(el.id);
+        itemImg.src = "img/" + el.id + ".png"; 
+        achievementsArray[el.id - 1] = true;
+        achCount++;
     })
+    for(let i = 0; i < 6; i++){
+        if(achievementsArray[i] == false){
+            const item = document.getElementById('achItem_' + (achCount.toString()));
+            item.insertAdjacentHTML("afterbegin", achievementsContent[i]);
+            achCount++;
+        }
+    }
     const sub = await fetch('https://api.innoprog.ru:3000/subscription/' + clientID);
     const int = await fetch('https://api.innoprog.ru:3000/intensities');
     const intens = await int.json();
