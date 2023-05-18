@@ -19,12 +19,11 @@ const subscriptionDay = document.getElementById("day");
 const subscriptionHour = document.getElementById("hour");
 const daysName = document.getElementById("days");
 const notificationButton = document.querySelector(".intensity__notifications__btn__click");
-const text = document.querySelectorAll(".text");
 const nightBar = document.querySelector(".rank__progress__bar");
 const intensityBar = document.querySelector(".intensity__progress__bar");
 const nightInformation = document.querySelector(".information__window");
 const hoursName = document.getElementById("hours");
-const achievementIcons = document.querySelectorAll(".achievements__list__item__text");
+const achievementIcons = document.querySelectorAll(".achievements__list__item");
 const achOne = document.getElementById("ach_1");
 const achTwo = document.getElementById("ach_2");
 const achThree = document.getElementById("ach_3");
@@ -277,6 +276,7 @@ async function get(){
         }
     }
     if(window.Telegram.WebApp.colorScheme == "dark"){
+        const text = document.querySelectorAll(".text");
         text.forEach(el => {
             el.classList.add("night");
         })
@@ -346,7 +346,7 @@ notificationButton.addEventListener("click", function() {
 
 achievementIcons.forEach(el => {
     el.addEventListener("click", function(){
-        switch (el.id){
+        switch (el.childNodes[0].id){
             case 'one':
                 achOne.style.display = 'block';
                 if(choosenAch != achOne){
