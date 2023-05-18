@@ -53,7 +53,8 @@ const sixthAchievementsContent = '<div id="six" class="achievements__list__item_
 const achievementsContent = [firstAchievementsContent, secondAchievementsContent, thirdAchievementsContent, fourthAchievementsContent, fifthAchievementsContent, sixthAchievementsContent];
 let isChoosen = false;
 let choosenElement;
-let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
+// let clientID = window.Telegram.WebApp.initDataUnsafe.user.id;
+let clientID = 1086925635;
 let night = false;
 let choosenAch = informationText;
 let dayP;
