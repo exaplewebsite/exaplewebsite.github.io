@@ -37,12 +37,13 @@
 }
 .rank__name__img {
   width: 120px;
+  margin-right: 5px;
 }
 .rank__name__text {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 70px;
+  margin-left: 5px;
 }
 .rank__name__text__your-rank {
   font-family: "Montserrat";
@@ -84,7 +85,7 @@
   font-size: 20px;
   line-height: 22px;
   color: #000000;
-  transform: translate(10px, 30px);
+
 }
 .rank__progress__numbers {
   width: 100%;

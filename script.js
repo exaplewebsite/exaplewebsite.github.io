@@ -126,7 +126,7 @@ async function get(){
     rankLower.textContent = rankLowerBound;
     rankUpper.textContent = rankUpperBound;
     let rankPercentage = ((rankPoints - rankLowerBound)/((rankUpperBound - rankLowerBound)/100)).toString();
-    if(rankPercentage < 3){
+    if(rankPercentage < 3 && rankPercentage != 0){
         rankPercentage = 3;
     }
     rankCompleteBar.style.width = rankPercentage + '%';
@@ -141,6 +141,7 @@ async function get(){
             rankUpper.textContent = '';
         }
     }
+    rankValue.style.transform = "translate(" + (rankValue.clientWidth/2 + 5).toString() + "px, 30px)";
     rankCurrentName.textContent = rankName;
     let discountValue = discount.discount;
     if(discountValue != 0){
