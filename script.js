@@ -126,6 +126,9 @@ async function get(){
     rankLower.textContent = rankLowerBound;
     rankUpper.textContent = rankUpperBound;
     let rankPercentage = ((rankPoints - rankLowerBound)/((rankUpperBound - rankLowerBound)/100)).toString();
+    if(rankPercentage < 3){
+        rankPercentage = 3;
+    }
     rankCompleteBar.style.width = rankPercentage + '%';
     if(rankPoints == rankUpperBound || rankPoints == rankLowerBound){
         rankValue.textContent = '';

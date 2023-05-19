@@ -84,7 +84,7 @@
   font-size: 20px;
   line-height: 22px;
   color: #000000;
-  transform: translateY(30px);
+  transform: translate(10px, 30px);
 }
 .rank__progress__numbers {
   width: 100%;
@@ -323,7 +323,7 @@
   font-size: 20px;
   line-height: 22px;
   color: #000000;
-  transform: translateY(30px);
+  transform: translate(10px, 30px);
 }
 .intensity__progress__numbers {
   width: 100%;
