@@ -413,7 +413,7 @@
   line-height: 24px;
   text-align: center;
   color: #000000;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 .office-hours__hr {
   border: 2px solid black;
@@ -426,7 +426,14 @@
 .office-hours__icons__clock {
   width: 90px;
 }
-
+#buy_h{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 8.5px;
+  text-align: center;
+  color: #000000;
+}
 .subscription {
   text-align: center;
   margin-top: 20px;
