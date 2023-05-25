@@ -281,6 +281,8 @@ async function get(){
     }
     if(window.Telegram.WebApp.colorScheme == "dark"){
         const text = document.querySelectorAll(".text");
+        const buyHours = document.getElementById("buy_h");
+        buyHours.style.color = 'white';
         text.forEach(el => {
             el.classList.add("night");
         })
