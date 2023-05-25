@@ -428,7 +428,7 @@
 }
 #buy_h{
   display: inline-block;
-  height: 20px;
+  line-height: 9px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
