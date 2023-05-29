@@ -246,6 +246,14 @@ async function get(){
             }
         }
         officeHoursNumber.textContent = officeHours;
+        const ofH = document.getElementById("of_h");
+        if(officeHours == 1){
+            ofH.textContent = 'индивидуальное занятие';
+        }else if(officeHours > 1 && officeHours < 5){
+            ofH.textContent = 'индивидуальных занятия';
+        }else{
+            ofH.textContent = 'индивидуальных занятий';
+        }
         let period = startDate[8].toString() + startDate[9].toString() + "." + startDate[5].toString() + startDate[6].toString() + "." + startDate[2].toString() + startDate[3].toString() + " - " + finishDate[8].toString() + finishDate[9].toString() + "." + finishDate[5].toString() + finishDate[6].toString() + "." + finishDate[2].toString() + finishDate[3].toString();
         subscriptionPeriod.textContent = period;
         let hours = findDate(finishDate);
