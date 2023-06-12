@@ -64,7 +64,7 @@ function findDate(data){
     let month = parseInt(data[5].toString() + data[6].toString()) - 1;
     let day = data[8].toString() + data[9].toString();
     let hour = data[11].toString() + data[12].toString();
-    const date = new Date();
+    const date = new Date.UTC();
     const endDate = new Date(parseInt(year), month, parseInt(day), parseInt(hour));
     return Math.round((endDate - date)/3600000);
 }
