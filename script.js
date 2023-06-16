@@ -65,9 +65,10 @@ function findDate(data){
     let day = data[8].toString() + data[9].toString();
     let hour = data[11].toString() + data[12].toString();
     const date = new Date();
-    const UTCDate = new Date(date.toUTCString())
     const endDate = new Date(parseInt(year), month, parseInt(day), parseInt(hour));
-    return Math.round((endDate - UTCDate)/3600000);
+    return Math.round((endDate - date)/3600000 - (date.getTimezoneOffset()/60));
+
+
 }
 
 const fadeM = (el, timeout) =>{
